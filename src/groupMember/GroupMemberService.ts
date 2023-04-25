@@ -4,19 +4,22 @@ import GroupMember from "./GroupMember";
 import GroupMemberRepository from "./GroupMemberRepository";
 import Group from "../group/Group";
 import DuplicationError from "../others/error/DuplicationError";
-
-const groupMemberRepository = new GroupMemberRepository();
-
 class GroupMemberService {
+  private readonly groupMemberRepository: GroupMemberRepository;
+
+  public constructor(groupMemberRepository: GroupMemberRepository) {
+    this.groupMemberRepository = groupMemberRepository;
+  }
+
   public getGroupMembersById = async (groupId: number): Promise<Array<GroupMember>> => {
-    const groupMembers = await groupMemberRepository.findAllByGroupId(groupId);
+    const groupMembers = await this.groupMemberRepository.findAllByGroupId(groupId);
     return groupMembers;
   };
 
   public checkMemberNotExistedById = async (groupId: number, groupMemberId: number): Promise<void> => {
     const group: Group = new Group(groupId);
     const groupMember: GroupMember = new GroupMember(groupMemberId, null, null, null, group);
-    const isExisted = await groupMemberRepository.isMemberExisted(groupMember);
+    const isExisted = await this.groupMemberRepository.isMemberExisted(groupMember);
     if (!isExisted) {
       throw new NotFoundError("group's member not found");
     }
@@ -27,14 +30,14 @@ class GroupMemberService {
     const { name, role, description } = req.body;
     const group: Group = new Group(Number(groupId));
     const groupMember: GroupMember = new GroupMember(null, role, name, description, group);
-    const newGroupMember: GroupMember = await groupMemberRepository.addNewMember(groupMember);
+    const newGroupMember: GroupMember = await this.groupMemberRepository.addNewMember(groupMember);
     return newGroupMember;
   };
 
   public checkGroupMemberIsCreated = async (groupId: number, name: string): Promise<void> => {
     const group: Group = new Group(groupId);
     const groupMember: GroupMember = new GroupMember(null, null, name, null, group);
-    const isExisted = await groupMemberRepository.isMemberExisted(groupMember);
+    const isExisted = await this.groupMemberRepository.isMemberExisted(groupMember);
     if (isExisted) {
       throw new DuplicationError("Group's member is created");
     }
