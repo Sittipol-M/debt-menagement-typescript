@@ -5,10 +5,13 @@ import GroupMember from "../groupMember/GroupMember";
 import DuplicationError from "../others/error/DuplicationError";
 import DebtMember from "./DebtMember";
 import DebtMemberRepository from "./DebtMemberRepository";
-
-const debtMemberRepository = new DebtMemberRepository();
-
 class DebtMemberService {
+  private readonly debtMemberRepository: DebtMemberRepository;
+
+  public constructor(debtMemberRepository: DebtMemberRepository) {
+    this.debtMemberRepository = debtMemberRepository;
+  }
+
   public checkDebtMemberIsCreated = async (
     groupId: number,
     debtId: number,
@@ -18,7 +21,7 @@ class DebtMemberService {
     const debt: Debt = new Debt(debtId, null, null, group);
     const groupMember: GroupMember = new GroupMember(groupMemberId);
     const debtMember: DebtMember = new DebtMember(null, null, null, null, groupMember, debt);
-    const isExisted = await debtMemberRepository.isDebtMemberExisted(debtMember);
+    const isExisted = await this.debtMemberRepository.isDebtMemberExisted(debtMember);
     if (isExisted) {
       throw new DuplicationError("This member is added to debt already");
     }
@@ -31,7 +34,7 @@ class DebtMemberService {
     const debt: Debt = new Debt(Number(debtId), null, null, group);
     const groupMember: GroupMember = new GroupMember(groupMemberId);
     const debtMember: DebtMember = new DebtMember(null, role, null, null, groupMember, debt);
-    const newDebtMember = await debtMemberRepository.addNewDebtMember(debtMember);
+    const newDebtMember = await this.debtMemberRepository.addNewDebtMember(debtMember);
     return newDebtMember;
   };
 }
