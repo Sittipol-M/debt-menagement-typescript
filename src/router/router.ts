@@ -15,6 +15,10 @@ import DebtRepository from "../debt/DebtRepository";
 import DebtMemberRepository from "../debtMember/DebtMemberRepository";
 import DebtMemberValidation from "../debtMember/DebtMemberValidation";
 import DebtMemberService from "../debtMember/DebtMemberService";
+import DebtRoute from "../debt/DebtRoute";
+import DebtMemberRoute from "../debtMember/DebtMemberRoute";
+import GroupRoute from "../group/GroupRoute";
+import GroupMemberRoute from "../groupMember/GroupMemberRoute";
 
 const router: Router = Router();
 
@@ -51,26 +55,20 @@ const debtMemberController: DebtMemberController = new DebtMemberController(
   groupMemberService
 );
 
-const defaultUrl: string = "/api/v1";
-
 // groups
-const groupsUrl: string = `${defaultUrl}/groups`;
-router.post(groupsUrl, groupController.addNewGroup);
-router.get(groupsUrl, groupController.getGroups);
+const groupRouter: Router = new GroupRoute(groupController).getGroupRouter();
+router.use(groupRouter);
 
 // group members
-const groupMembersUrl: string = `${groupsUrl}/:groupId/group-members`;
-router.post(groupMembersUrl, groupMemberController.addNewGroupMember);
-router.get(groupMembersUrl, groupMemberController.getGroupMembers);
+const groupMemberRouter: Router = new GroupMemberRoute(groupMemberController).getGroupMemberRouter();
+router.use(groupMemberRouter);
 
 // debts
-const debtsUrl: string = `${groupsUrl}/:groupId/debts`;
-router.post(debtsUrl, debtController.addNewDebt);
-router.get(debtsUrl, debtController.getDebts);
+const debtRouter: Router = new DebtRoute(debtController).getDebtRouter();
+router.use(debtRouter);
 
 // debt members
-const debtMembersUrl: string = `${debtsUrl}/:debtId/debt-members`;
-router.post(debtMembersUrl, debtMemberController.addNewDebtMember);
-router.get(debtMembersUrl, debtMemberController.getDebtMembers);
+const debtMemberRouter: Router = new DebtMemberRoute(debtMemberController).getDebMemberRouter();
+router.use(debtMemberRouter);
 
 export default router;
