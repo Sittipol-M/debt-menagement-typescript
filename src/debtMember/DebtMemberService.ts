@@ -37,6 +37,14 @@ class DebtMemberService {
     const newDebtMember = await this.debtMemberRepository.addNewDebtMember(debtMember);
     return newDebtMember;
   };
+
+  public getDebtMembers = async (req: Request): Promise<Array<DebtMember>> => {
+    const { debtId, groupId } = req.params;
+    const group: Group = new Group(Number(groupId));
+    const debt: Debt = new Debt(Number(debtId), null, null, group);
+    const debtMembers: Array<DebtMember> = await this.debtMemberRepository.getDebtMembers(debt);
+    return debtMembers;
+  };
 }
 
 export default DebtMemberService;

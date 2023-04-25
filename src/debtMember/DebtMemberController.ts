@@ -5,6 +5,7 @@ import GroupService from "../group/GroupService";
 import DebtService from "../debt/DebtService";
 import DebtMemberService from "./DebtMemberService";
 import GroupMemberService from "../groupMember/GroupMemberService";
+import DebtMember from "./DebtMember";
 
 class DebtMemberController {
   private readonly debtMemberValidation: DebtMemberValidation;
@@ -31,7 +32,7 @@ class DebtMemberController {
     try {
       const { debtId, groupId } = req.params;
       const { groupMemberId } = req.body;
-      await this.debtMemberValidation.validateAddNewDebtMemberRequestParams(req);
+      await this.debtMemberValidation.validateDebtMemberRequestParams(req);
       await this.debtMemberValidation.validateAddNewDebtMemberRequestBody(req);
       await this.groupService.checkGroupNotExistedById(Number(groupId));
       await this.debtService.checkDebtNotExisted(Number(groupId), Number(debtId));
@@ -41,8 +42,8 @@ class DebtMemberController {
         Number(debtId),
         Number(groupMemberId)
       );
-      await this.debtMemberService.addNewDebtMember(req);
-      res.status(HttpStatus.CREATED).json({ message: "Add new debt's member successful" });
+      const debtMember: DebtMember = await this.debtMemberService.addNewDebtMember(req);
+      res.status(HttpStatus.CREATED).json({ message: "Add new debt's member successful", debtMember });
     } catch (error) {
       next(error);
     }
@@ -50,7 +51,9 @@ class DebtMemberController {
 
   public getDebtMembers = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-      res.status(HttpStatus.OK).json({ message: "Get debt's members successful" });
+      await this.debtMemberValidation.validateDebtMemberRequestParams(req);
+      const debtMembers: Array<DebtMember> = await this.debtMemberService.getDebtMembers(req);
+      res.status(HttpStatus.OK).json({ message: "Get debt's members successful", debtMembers });
     } catch (error) {
       next(error);
     }

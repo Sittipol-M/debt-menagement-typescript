@@ -5,10 +5,11 @@ import ValidationError from "../others/error/ValidationError";
 import DebtMemberRole from "../others/enums/DebtMemberRole";
 
 class DebtMemberValidation {
-  public validateAddNewDebtMemberRequestParams = async (req: Request): Promise<void> => {
+  public validateDebtMemberRequestParams = async (req: Request): Promise<void> => {
     const schema: Schema = Joi.object({
       groupId: Joi.number(),
       debtId: Joi.number(),
+      debtMemberId: Joi.number(),
     });
     try {
       await schema.validateAsync(req.params);
