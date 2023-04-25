@@ -6,28 +6,42 @@ import DebtService from "../debt/DebtService";
 import DebtMemberService from "./DebtMemberService";
 import GroupMemberService from "../groupMember/GroupMemberService";
 
-const debtMemberValidation = new DebtMemberValidation();
-const groupService = new GroupService();
-const debtService = new DebtService();
-const groupMemberService = new GroupMemberService();
-const debtMemberService = new DebtMemberService();
-
 class DebtMemberController {
+  private readonly debtMemberValidation: DebtMemberValidation;
+  private readonly debtMemberService: DebtMemberService;
+  private readonly debtService: DebtService;
+  private readonly groupService: GroupService;
+  private readonly groupMemberService: GroupMemberService;
+
+  public constructor(
+    debtMemberValidation: DebtMemberValidation,
+    debtMemberService: DebtMemberService,
+    debtService: DebtService,
+    groupService: GroupService,
+    groupMemberService: GroupMemberService
+  ) {
+    this.debtMemberValidation = debtMemberValidation;
+    this.debtMemberService = debtMemberService;
+    this.debtService = debtService;
+    this.groupService = groupService;
+    this.groupMemberService = groupMemberService;
+  }
+
   public addNewDebtMember = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
       const { debtId, groupId } = req.params;
       const { groupMemberId } = req.body;
-      await debtMemberValidation.validateAddNewDebtMemberRequestParams(req);
-      await debtMemberValidation.validateAddNewDebtMemberRequestBody(req);
-      await groupService.checkGroupNotExistedById(Number(groupId));
-      await debtService.checkDebtNotExisted(Number(groupId), Number(debtId));
-      await groupMemberService.checkMemberNotExistedById(Number(groupId), Number(groupMemberId));
-      await debtMemberService.checkDebtMemberIsCreated(
+      await this.debtMemberValidation.validateAddNewDebtMemberRequestParams(req);
+      await this.debtMemberValidation.validateAddNewDebtMemberRequestBody(req);
+      await this.groupService.checkGroupNotExistedById(Number(groupId));
+      await this.debtService.checkDebtNotExisted(Number(groupId), Number(debtId));
+      await this.groupMemberService.checkMemberNotExistedById(Number(groupId), Number(groupMemberId));
+      await this.debtMemberService.checkDebtMemberIsCreated(
         Number(groupId),
         Number(debtId),
         Number(groupMemberId)
       );
-      await debtMemberService.addNewDebtMember(req);
+      await this.debtMemberService.addNewDebtMember(req);
       res.status(HttpStatus.CREATED).json({ message: "Add new debt's member successful" });
     } catch (error) {
       next(error);

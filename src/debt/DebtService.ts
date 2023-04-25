@@ -4,8 +4,6 @@ import Debt from "./Debt";
 import Group from "../group/Group";
 import DuplicationError from "../others/error/DuplicationError";
 
-const debtRepository = new DebtRepository();
-
 class DebtService {
   private readonly debtRepository: DebtRepository;
 
