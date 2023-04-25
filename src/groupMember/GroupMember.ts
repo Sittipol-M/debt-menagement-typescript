@@ -9,7 +9,6 @@ import {
 } from "typeorm";
 import GroupMemberRole from "../others/enums/GroupMemberRole";
 import Group from "../group/Group";
-import DebtMember from "../debtMember/DebtMember";
 
 @Entity({ name: "group_members" })
 class GroupMember {
