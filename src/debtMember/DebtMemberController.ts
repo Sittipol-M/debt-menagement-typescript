@@ -5,7 +5,7 @@ import GroupService from "../group/GroupService";
 import DebtService from "../debt/DebtService";
 import DebtMemberService from "./DebtMemberService";
 import GroupMemberService from "../groupMember/GroupMemberService";
-import DebtMember from "./DebtMember";
+import DebtMember from "../entity/DebtMember";
 
 class DebtMemberController {
   private readonly debtMemberValidation: DebtMemberValidation;

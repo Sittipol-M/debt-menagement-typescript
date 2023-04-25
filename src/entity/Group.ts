@@ -6,7 +6,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
-import Debt from "../debt/Debt";
+import Debt from "./Debt";
 
 @Entity({ name: "groups" })
 class Group {

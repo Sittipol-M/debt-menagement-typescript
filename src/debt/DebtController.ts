@@ -3,7 +3,7 @@ import HttpStatus from "../others/enums/HttpStatus";
 import DebtValidation from "./DebtValidation";
 import GroupService from "../group/GroupService";
 import DebtService from "./DebtService";
-import Debt from "./Debt";
+import Debt from "../entity/Debt";
 class DebtController {
   private readonly debtValidation: DebtValidation;
   private readonly debtService: DebtService;

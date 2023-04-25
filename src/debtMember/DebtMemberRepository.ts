@@ -1,20 +1,22 @@
-import Debt from "../debt/Debt";
-import { AppDataSource } from "../others/database/data-source";
-import DebtMember from "./DebtMember";
+import Debt from "../entity/Debt";
+import { PostgresDataSource } from "../others/database/PostgresDataSource";
+import DebtMember from "../entity/DebtMember";
 
 class DebtMemberRepository {
   public isDebtMemberExisted = async (debtMember: DebtMember): Promise<boolean> => {
-    const isExisted: boolean = await AppDataSource.getRepository(DebtMember).exist({ where: debtMember });
+    const isExisted: boolean = await PostgresDataSource.getRepository(DebtMember).exist({
+      where: debtMember,
+    });
     return isExisted;
   };
 
   public addNewDebtMember = async (debtMember: DebtMember): Promise<DebtMember> => {
-    const newDebtMember = await AppDataSource.getRepository(DebtMember).save(debtMember);
+    const newDebtMember = await PostgresDataSource.getRepository(DebtMember).save(debtMember);
     return newDebtMember;
   };
 
   public getDebtMembers = async (debt: Debt): Promise<Array<DebtMember>> => {
-    const debtMembers = await AppDataSource.getRepository(DebtMember).find({ where: { debt } });
+    const debtMembers = await PostgresDataSource.getRepository(DebtMember).find({ where: { debt } });
     return debtMembers;
   };
 }

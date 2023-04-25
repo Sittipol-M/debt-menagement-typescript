@@ -1,9 +1,9 @@
 import { Request } from "express";
-import Debt from "../debt/Debt";
-import Group from "../group/Group";
-import GroupMember from "../groupMember/GroupMember";
+import Debt from "../entity/Debt";
+import Group from "../entity/Group";
+import GroupMember from "../entity/GroupMember";
 import DuplicationError from "../others/error/DuplicationError";
-import DebtMember from "./DebtMember";
+import DebtMember from "../entity/DebtMember";
 import DebtMemberRepository from "./DebtMemberRepository";
 class DebtMemberService {
   private readonly debtMemberRepository: DebtMemberRepository;

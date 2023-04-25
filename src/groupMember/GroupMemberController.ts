@@ -3,7 +3,7 @@ import HttpStatus from "../others/enums/HttpStatus";
 import GroupMemberService from "./GroupMemberService";
 import GroupMemberValidation from "./GroupMemberValidation";
 import GroupService from "../group/GroupService";
-import GroupMember from "./GroupMember";
+import GroupMember from "../entity/GroupMember";
 
 class GroupMemberController {
   private readonly groupMemberService: GroupMemberService;

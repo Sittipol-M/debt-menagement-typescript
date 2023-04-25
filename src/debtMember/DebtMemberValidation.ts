@@ -1,6 +1,6 @@
 import { Request } from "express";
 import { Schema } from "joi";
-import * as Joi from "joi";
+import Joi from "joi";
 import ValidationError from "../others/error/ValidationError";
 import DebtMemberRole from "../others/enums/DebtMemberRole";
 

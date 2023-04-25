@@ -1,7 +1,7 @@
 import { Request } from "express";
 import DebtRepository from "./DebtRepository";
-import Debt from "./Debt";
-import Group from "../group/Group";
+import Debt from "../entity/Debt";
+import Group from "../entity/Group";
 import DuplicationError from "../others/error/DuplicationError";
 
 class DebtService {

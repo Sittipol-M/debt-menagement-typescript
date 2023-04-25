@@ -1,5 +1,5 @@
 import { Request } from "express";
-import * as Joi from "joi";
+import Joi from "joi";
 import { Schema } from "joi";
 import ValidationError from "../others/error/ValidationError";
 
