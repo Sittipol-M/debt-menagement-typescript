@@ -1,8 +1,8 @@
 import { Request } from "express";
 import NotFoundError from "../others/error/NotFoundError";
-import GroupMember from "../entity/GroupMember";
+import GroupMember from "./GroupMember";
 import GroupMemberRepository from "./GroupMemberRepository";
-import Group from "../entity/Group";
+import Group from "../group/Group";
 import DuplicationError from "../others/error/DuplicationError";
 class GroupMemberService {
   private readonly groupMemberRepository: GroupMemberRepository;

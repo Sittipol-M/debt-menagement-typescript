@@ -9,8 +9,8 @@ import {
   UpdateDateColumn,
 } from "typeorm";
 import DebtMemberRole from "../others/enums/DebtMemberRole";
-import GroupMember from "./GroupMember";
-import Debt from "./Debt";
+import GroupMember from "../groupMember/GroupMember";
+import Debt from "../debt/Debt";
 
 @Entity({ name: "debt_members" })
 class DebtMember {

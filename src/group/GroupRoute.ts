@@ -2,7 +2,7 @@ import { Router } from "express";
 import GroupController from "./GroupController";
 
 class GroupRoute {
-  private readonly url: string = `/api/v1/groups`;
+  private readonly url: string = `/groups`;
   private readonly router: Router;
   private readonly groupController: GroupController;
 

@@ -1,5 +1,5 @@
 import { Request } from "express";
-import Group from "../entity/Group";
+import Group from "./Group";
 import GroupRepository from "./GroupRepository";
 import DuplicationError from "../others/error/DuplicationError";
 import NotFoundError from "../others/error/NotFoundError";

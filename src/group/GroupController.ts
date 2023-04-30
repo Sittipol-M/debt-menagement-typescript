@@ -7,9 +7,9 @@ class GroupController {
   private readonly groupService: GroupService;
   private readonly groupValidation: GroupValidation;
 
-  public constructor(groupService: GroupService, groupValidation: GroupValidation) {
+  public constructor(groupService: GroupService) {
     this.groupService = groupService;
-    this.groupValidation = groupValidation;
+    this.groupValidation = new GroupValidation();
   }
 
   public addNewGroup = async (req: Request, res: Response, next: NextFunction) => {

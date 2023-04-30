@@ -1,18 +1,27 @@
-import { DataSource } from "typeorm";
+import dotenv from "dotenv";
 import GroupRepository from "../../group/GroupRepository";
 import { PostgresDataSource } from "../../others/database/PostgresDataSource";
-import Group from "../../entity/Group";
+import Group from "../../group/Group";
 
-describe("test group", () => {
-  let postgresDataSource: DataSource;
+describe("Group Repository", () => {
   let groupRepository: GroupRepository;
+  let postgresDataSource: PostgresDataSource;
   beforeAll(async () => {
-    groupRepository = new GroupRepository();
-    postgresDataSource = PostgresDataSource;
+    dotenv.config({ path: __dirname + "./../../../.env.test" });
+    postgresDataSource = new PostgresDataSource(
+      process.env.POSTGRES_HOST,
+      Number(process.env.POSTGRES_PORT),
+      process.env.POSTGRES_USERNAME,
+      process.env.POSTGRES_PASSWORD,
+      process.env.POSTGRES_DATABASE
+    );
     await postgresDataSource.initialize();
+    groupRepository = new GroupRepository(postgresDataSource.getInstance());
   });
-  it("test group 1", async () => {
-    const groups: Array<Group> = await groupRepository.findAll();
-    console.log({ groups });
+
+  test("addNewGroup", async () => {
+    const group: Group = new Group(null, "groupNameTest", "groupDescription");
+    const newGroup = await groupRepository.addNewGroup(group);
+    expect(newGroup).toEqual(group);
   });
 });

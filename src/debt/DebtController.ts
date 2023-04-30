@@ -3,14 +3,14 @@ import HttpStatus from "../others/enums/HttpStatus";
 import DebtValidation from "./DebtValidation";
 import GroupService from "../group/GroupService";
 import DebtService from "./DebtService";
-import Debt from "../entity/Debt";
+import Debt from "./Debt";
 class DebtController {
   private readonly debtValidation: DebtValidation;
   private readonly debtService: DebtService;
   private readonly groupService: GroupService;
 
-  public constructor(debtValidation: DebtValidation, debtService: DebtService, groupService: GroupService) {
-    this.debtValidation = debtValidation;
+  public constructor(debtService: DebtService, groupService: GroupService) {
+    this.debtValidation = new DebtValidation();
     this.debtService = debtService;
     this.groupService = groupService;
   }

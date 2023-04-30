@@ -5,7 +5,7 @@ import GroupService from "../group/GroupService";
 import DebtService from "../debt/DebtService";
 import DebtMemberService from "./DebtMemberService";
 import GroupMemberService from "../groupMember/GroupMemberService";
-import DebtMember from "../entity/DebtMember";
+import DebtMember from "./DebtMember";
 
 class DebtMemberController {
   private readonly debtMemberValidation: DebtMemberValidation;
@@ -15,13 +15,12 @@ class DebtMemberController {
   private readonly groupMemberService: GroupMemberService;
 
   public constructor(
-    debtMemberValidation: DebtMemberValidation,
     debtMemberService: DebtMemberService,
     debtService: DebtService,
     groupService: GroupService,
     groupMemberService: GroupMemberService
   ) {
-    this.debtMemberValidation = debtMemberValidation;
+    this.debtMemberValidation = new DebtMemberValidation();
     this.debtMemberService = debtMemberService;
     this.debtService = debtService;
     this.groupService = groupService;

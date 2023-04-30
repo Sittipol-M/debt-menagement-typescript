@@ -6,5 +6,7 @@ const config: Config.InitialOptions = {
     "^.+\\.tsx?$": "ts-jest",
   },
   maxWorkers: 1,
+  // watchAll: true,
+  forceExit: true,
 };
 export default config;

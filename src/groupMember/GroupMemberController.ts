@@ -3,21 +3,17 @@ import HttpStatus from "../others/enums/HttpStatus";
 import GroupMemberService from "./GroupMemberService";
 import GroupMemberValidation from "./GroupMemberValidation";
 import GroupService from "../group/GroupService";
-import GroupMember from "../entity/GroupMember";
+import GroupMember from "./GroupMember";
 
 class GroupMemberController {
   private readonly groupMemberService: GroupMemberService;
   private readonly groupMemberValidation: GroupMemberValidation;
   private readonly groupService: GroupService;
 
-  public constructor(
-    groupMemberService: GroupMemberService,
-    groupMemberValidation: GroupMemberValidation,
-    groupService: GroupService
-  ) {
+  public constructor(groupMemberService: GroupMemberService, groupService: GroupService) {
     this.groupMemberService = groupMemberService;
-    this.groupMemberValidation = groupMemberValidation;
     this.groupService = groupService;
+    this.groupMemberValidation = new GroupMemberValidation();
   }
 
   public addNewGroupMember = async (req: Request, res: Response, next: NextFunction): Promise<void> => {

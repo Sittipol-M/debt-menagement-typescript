@@ -7,7 +7,7 @@ import {
   UpdateDateColumn,
 } from "typeorm";
 import GroupMemberRole from "../others/enums/GroupMemberRole";
-import Group from "./Group";
+import Group from "../group/Group";
 
 @Entity({ name: "group_members" })
 class GroupMember {
