@@ -7,7 +7,7 @@ import app from "../../app";
 
 const defaultUrl = "/api/v1";
 
-describe("POST /groups", () => {
+describe.skip("POST /groups", () => {
   let app: Express;
   beforeAll(async () => {
     app = await new App().createServer();

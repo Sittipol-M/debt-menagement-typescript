@@ -10,17 +10,15 @@ class GroupService {
     this.groupRepository = groupRepository;
   }
 
-  public addNewGroup = async (req: Request): Promise<Group> => {
-    const { name, description } = req.body;
-    const group = new Group(null, name, description);
-    const newGroup = await this.groupRepository.addNewGroup(group);
+  public addNewGroup = async (group: Group): Promise<Group> => {
+    const newGroup = await this.groupRepository.save(group);
     return newGroup;
   };
 
   public checkGroupIsCreated = async (name: string): Promise<void> => {
     const group: Group = new Group();
     group.name = name;
-    const isExisted = await this.groupRepository.isGroupExisted(group);
+    const isExisted = await this.groupRepository.isExisted(group);
     if (isExisted) {
       throw new DuplicationError("Group's name is used");
     }
@@ -29,7 +27,7 @@ class GroupService {
   public checkGroupNotExistedById = async (id: number): Promise<void> => {
     const group: Group = new Group();
     group.id = id;
-    const isExisted = await this.groupRepository.isGroupExisted(group);
+    const isExisted = await this.groupRepository.isExisted(group);
     if (!isExisted) {
       throw new NotFoundError("Group not found");
     }
@@ -38,6 +36,11 @@ class GroupService {
   public getGroups = async (): Promise<Array<Group>> => {
     const groups = await this.groupRepository.findAll();
     return groups;
+  };
+
+  public deleteByName = async (name: string): Promise<void> => {
+    const group: Group = new Group(null, name);
+    await this.groupRepository.delete(group);
   };
 }
 

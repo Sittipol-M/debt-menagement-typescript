@@ -8,7 +8,7 @@ class GroupRepository {
     this.dataSource = dataSource;
   }
 
-  public addNewGroup = async (group: Group): Promise<Group> => {
+  public save = async (group: Group): Promise<Group> => {
     const newGroup: Group = await this.dataSource.getRepository(Group).save(group);
     return newGroup;
   };
@@ -18,18 +18,18 @@ class GroupRepository {
     return groups;
   };
 
-  public findOneByName = async (name: string): Promise<Group> => {
-    const group: Group = await this.dataSource.getRepository(Group).findOneBy({ name });
-    return group;
+  public findOne = async (group: Group): Promise<Group> => {
+    const foundGroup: Group = await this.dataSource.getRepository(Group).findOneBy(group);
+    return foundGroup;
   };
 
-  public isGroupExisted = async (group: Group): Promise<boolean> => {
+  public isExisted = async (group: Group): Promise<boolean> => {
     const isExisted: boolean = await this.dataSource.getRepository(Group).exist({ where: group });
     return isExisted;
   };
 
-  public deleteGroupByName = async (name: string): Promise<DeleteResult> => {
-    const result: DeleteResult = await this.dataSource.getRepository(Group).delete({ name });
+  public delete = async (group: Group): Promise<DeleteResult> => {
+    const result: DeleteResult = await this.dataSource.getRepository(Group).delete(group);
     return result;
   };
 }

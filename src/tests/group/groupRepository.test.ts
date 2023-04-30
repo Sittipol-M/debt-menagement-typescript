@@ -3,7 +3,7 @@ import GroupRepository from "../../group/GroupRepository";
 import { PostgresDataSource } from "../../others/database/PostgresDataSource";
 import Group from "../../group/Group";
 
-describe("Group Repository", () => {
+describe("GroupRepository", () => {
   let groupRepository: GroupRepository;
   let postgresDataSource: PostgresDataSource;
   const groupForTest: Group = new Group(null, "groupNameTest", "groupDescription");
@@ -20,8 +20,8 @@ describe("Group Repository", () => {
     groupRepository = new GroupRepository(postgresDataSource.getInstance());
   });
 
-  test("addNewGroup", async () => {
-    const newGroup = await groupRepository.addNewGroup(groupForTest);
+  test("save", async () => {
+    const newGroup: Group = await groupRepository.save(groupForTest);
     expect(newGroup).toBe(groupForTest);
     delete groupForTest.createdAt;
     delete groupForTest.updatedAt;
@@ -33,18 +33,18 @@ describe("Group Repository", () => {
     expect(groups[0].name).toBe(groupForTest.name);
   });
 
-  test("findOneByName (before deleteGroup)", async () => {
-    const group: Group = await groupRepository.findOneByName(groupForTest.name);
+  test("findOne (before deleteGroup)", async () => {
+    const group: Group = await groupRepository.findOne(groupForTest);
     expect(group.name).toBe(group.name);
   });
 
-  test("isGroupExisted (before deleteGroup)", async () => {
-    const isExisted: boolean = await groupRepository.isGroupExisted(groupForTest);
+  test("isExisted (before deleteGroup)", async () => {
+    const isExisted: boolean = await groupRepository.isExisted(groupForTest);
     expect(isExisted).toBe(true);
   });
 
   test("deleteGroup", async () => {
-    const result = await groupRepository.deleteGroupByName(groupForTest.name);
+    const result = await groupRepository.delete(groupForTest);
     expect(result.affected).toEqual(1);
   });
 
@@ -53,13 +53,13 @@ describe("Group Repository", () => {
     expect(groups.length).toBe(0);
   });
 
-  test("findOneByName (after deleteGroup)", async () => {
-    const group: Group = await groupRepository.findOneByName(groupForTest.name);
+  test("findOne (after deleteGroup)", async () => {
+    const group: Group = await groupRepository.findOne(groupForTest);
     expect(group).toBe(undefined || null);
   });
 
   test("isGroupExisted (after deleteGroup)", async () => {
-    const isExisted: boolean = await groupRepository.isGroupExisted(groupForTest);
+    const isExisted: boolean = await groupRepository.isExisted(groupForTest);
     expect(isExisted).toBe(false);
   });
 });
