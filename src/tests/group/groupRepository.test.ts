@@ -6,6 +6,7 @@ import Group from "../../group/Group";
 describe("Group Repository", () => {
   let groupRepository: GroupRepository;
   let postgresDataSource: PostgresDataSource;
+  const groupForTest: Group = new Group(null, "groupNameTest", "groupDescription");
   beforeAll(async () => {
     dotenv.config({ path: __dirname + "./../../../.env.test" });
     postgresDataSource = new PostgresDataSource(
@@ -20,8 +21,45 @@ describe("Group Repository", () => {
   });
 
   test("addNewGroup", async () => {
-    const group: Group = new Group(null, "groupNameTest", "groupDescription");
-    const newGroup = await groupRepository.addNewGroup(group);
-    expect(newGroup).toEqual(group);
+    const newGroup = await groupRepository.addNewGroup(groupForTest);
+    expect(newGroup).toBe(groupForTest);
+    delete groupForTest.createdAt;
+    delete groupForTest.updatedAt;
+    delete groupForTest.id;
+  });
+
+  test("findAll (before deleteGroup)", async () => {
+    const groups: Array<Group> = await groupRepository.findAll();
+    expect(groups[0].name).toBe(groupForTest.name);
+  });
+
+  test("findOneByName (before deleteGroup)", async () => {
+    const group: Group = await groupRepository.findOneByName(groupForTest.name);
+    expect(group.name).toBe(group.name);
+  });
+
+  test("isGroupExisted (before deleteGroup)", async () => {
+    const isExisted: boolean = await groupRepository.isGroupExisted(groupForTest);
+    expect(isExisted).toBe(true);
+  });
+
+  test("deleteGroup", async () => {
+    const result = await groupRepository.deleteGroupByName(groupForTest.name);
+    expect(result.affected).toEqual(1);
+  });
+
+  test("findAll (after deleteGroup)", async () => {
+    const groups: Array<Group> = await groupRepository.findAll();
+    expect(groups.length).toBe(0);
+  });
+
+  test("findOneByName (after deleteGroup)", async () => {
+    const group: Group = await groupRepository.findOneByName(groupForTest.name);
+    expect(group).toBe(undefined || null);
+  });
+
+  test("isGroupExisted (after deleteGroup)", async () => {
+    const isExisted: boolean = await groupRepository.isGroupExisted(groupForTest);
+    expect(isExisted).toBe(false);
   });
 });
