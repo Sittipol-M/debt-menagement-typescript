@@ -28,8 +28,8 @@ class GroupRepository {
     return isExisted;
   };
 
-  public deleteGroup = async (group: Group): Promise<DeleteResult> => {
-    const result: DeleteResult = await this.dataSource.getRepository(Group).delete(group);
+  public deleteGroupByName = async (name: string): Promise<DeleteResult> => {
+    const result: DeleteResult = await this.dataSource.getRepository(Group).delete({ name });
     return result;
   };
 }
