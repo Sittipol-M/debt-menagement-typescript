@@ -17,7 +17,7 @@ class GroupController {
     try {
       const { name, description } = req.body;
       await this.groupValidation.validateAddNewGroupRequestBody(req);
-      await this.groupService.checkGroupIsCreated(name);
+      await this.groupService.checkIfGroupCreatedByName(name);
       const newGroup = await this.groupService.addNewGroup(new Group(null, name, description));
       res.status(HttpStatus.CREATED).json({ message: "Created group successful", newGroup });
     } catch (error) {

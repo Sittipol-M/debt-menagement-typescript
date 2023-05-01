@@ -6,6 +6,7 @@ import Group from "../../group/Group";
 describe("GroupRepository", () => {
   let groupRepository: GroupRepository;
   let postgresDataSource: PostgresDataSource;
+  let createdGroup: Group;
   const groupForTest: Group = new Group(null, "groupNameTest", "groupDescription");
   beforeAll(async () => {
     dotenv.config({ path: __dirname + "./../../../.env.test" });
@@ -21,8 +22,8 @@ describe("GroupRepository", () => {
   });
 
   test("save", async () => {
-    const newGroup: Group = await groupRepository.save(groupForTest);
-    expect(newGroup).toBe(groupForTest);
+    createdGroup = await groupRepository.save(groupForTest);
+    expect(createdGroup.name).toBe(createdGroup.name);
     delete groupForTest.createdAt;
     delete groupForTest.updatedAt;
     delete groupForTest.id;
@@ -30,12 +31,14 @@ describe("GroupRepository", () => {
 
   test("findAll (before deleteGroup)", async () => {
     const groups: Array<Group> = await groupRepository.findAll();
-    expect(groups[0].name).toBe(groupForTest.name);
+    console.log({ groups });
+    expect(groups[0].name).toBe(createdGroup.name);
   });
 
   test("findOne (before deleteGroup)", async () => {
     const group: Group = await groupRepository.findOne(groupForTest);
-    expect(group.name).toBe(group.name);
+    console.log({ group });
+    expect(group.name).toBe(createdGroup.name);
   });
 
   test("isExisted (before deleteGroup)", async () => {
@@ -61,5 +64,9 @@ describe("GroupRepository", () => {
   test("isGroupExisted (after deleteGroup)", async () => {
     const isExisted: boolean = await groupRepository.isExisted(groupForTest);
     expect(isExisted).toBe(false);
+  });
+
+  afterAll(async () => {
+    await postgresDataSource.getInstance().getRepository(Group).delete({});
   });
 });

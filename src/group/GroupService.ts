@@ -1,4 +1,3 @@
-import { Request } from "express";
 import Group from "./Group";
 import GroupRepository from "./GroupRepository";
 import DuplicationError from "../others/error/DuplicationError";
@@ -15,18 +14,16 @@ class GroupService {
     return newGroup;
   };
 
-  public checkGroupIsCreated = async (name: string): Promise<void> => {
-    const group: Group = new Group();
-    group.name = name;
+  public checkIfGroupCreatedByName = async (name: string): Promise<void> => {
+    const group: Group = new Group(null, name);
     const isExisted = await this.groupRepository.isExisted(group);
     if (isExisted) {
       throw new DuplicationError("Group's name is used");
     }
   };
 
-  public checkGroupNotExistedById = async (id: number): Promise<void> => {
-    const group: Group = new Group();
-    group.id = id;
+  public checkIfGroupNotExistedById = async (id: number): Promise<void> => {
+    const group: Group = new Group(id);
     const isExisted = await this.groupRepository.isExisted(group);
     if (!isExisted) {
       throw new NotFoundError("Group not found");

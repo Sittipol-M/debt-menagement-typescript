@@ -9,8 +9,8 @@ class GroupRepository {
   }
 
   public save = async (group: Group): Promise<Group> => {
-    const newGroup: Group = await this.dataSource.getRepository(Group).save(group);
-    return newGroup;
+    const savedGroup: Group = await this.dataSource.getRepository(Group).save(group);
+    return savedGroup;
   };
 
   public findAll = async (): Promise<Array<Group>> => {

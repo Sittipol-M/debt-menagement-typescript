@@ -22,7 +22,7 @@ class GroupMemberController {
       const { name } = req.body;
       await this.groupMemberValidation.validateGroupMembersRequestParams(req);
       await this.groupMemberValidation.validateAddNewGroupMemberRequestBody(req);
-      await this.groupService.checkGroupNotExistedById(Number(groupId));
+      await this.groupService.checkIfGroupNotExistedById(Number(groupId));
       await this.groupMemberService.checkGroupMemberIsCreated(Number(groupId), name);
       const newGroupMember: GroupMember = await this.groupMemberService.addNewGroupMember(req);
       res.status(HttpStatus.CREATED).json({ message: "Add new group's member successful", newGroupMember });

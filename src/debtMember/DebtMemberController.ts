@@ -33,7 +33,7 @@ class DebtMemberController {
       const { groupMemberId } = req.body;
       await this.debtMemberValidation.validateDebtMemberRequestParams(req);
       await this.debtMemberValidation.validateAddNewDebtMemberRequestBody(req);
-      await this.groupService.checkGroupNotExistedById(Number(groupId));
+      await this.groupService.checkIfGroupNotExistedById(Number(groupId));
       await this.debtService.checkDebtNotExisted(Number(groupId), Number(debtId));
       await this.groupMemberService.checkMemberNotExistedById(Number(groupId), Number(groupMemberId));
       await this.debtMemberService.checkDebtMemberIsCreated(

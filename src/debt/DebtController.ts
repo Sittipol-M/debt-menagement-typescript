@@ -21,7 +21,7 @@ class DebtController {
       const { name } = req.body;
       await this.debtValidation.validateAddNewDebtRequestParams(req);
       await this.debtValidation.validateAddNewDebtRequestBody(req);
-      await this.groupService.checkGroupNotExistedById(Number(groupId));
+      await this.groupService.checkIfGroupNotExistedById(Number(groupId));
       await this.debtService.checkDebtIsCreated(Number(groupId), name);
       const newDebt: Debt = await this.debtService.addNewDebt(req);
       res.status(HttpStatus.CREATED).json({ message: "Add new debt successful", newDebt });

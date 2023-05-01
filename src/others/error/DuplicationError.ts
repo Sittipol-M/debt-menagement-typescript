@@ -4,6 +4,7 @@ import CustomError from "./CustomError";
 class DuplicationError extends CustomError {
   constructor(message: string) {
     super(message, HttpStatus.CONFLICT);
+    Object.setPrototypeOf(this, DuplicationError.prototype);
   }
 }
 

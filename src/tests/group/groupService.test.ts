@@ -3,13 +3,14 @@ import GroupService from "../../group/GroupService";
 import dotenv from "dotenv";
 import { PostgresDataSource } from "../../others/database/PostgresDataSource";
 import Group from "../../group/Group";
-import { Request, request } from "express";
 import DuplicationError from "../../others/error/DuplicationError";
+import NotFoundError from "../../others/error/NotFoundError";
 
-describe.skip("GroupService", () => {
+describe("GroupService", () => {
   let groupService: GroupService;
   let groupRepository: GroupRepository;
   let postgresDataSource: PostgresDataSource;
+  let savedGroup: Group;
   const groupForTest: Group = new Group(null, "groupNameTest", "groupDescription");
   beforeAll(async () => {
     dotenv.config({ path: __dirname + "./../../../.env.test" });
@@ -26,18 +27,33 @@ describe.skip("GroupService", () => {
   });
 
   test("addNewGroup", async () => {
-    const newGroup: Group = await groupService.addNewGroup(groupForTest);
-    expect(newGroup.name).toBe(groupForTest.name);
+    savedGroup = await groupService.addNewGroup(groupForTest);
+    expect(savedGroup.name).toBe(groupForTest.name);
   });
 
-  //   test("checkGroupIsCreated", async () => {
-  //     // try {
-  //     //   await groupService.checkGroupIsCreated(groupForTest.name);
-  //     // } catch (error) {
-  //     //   expect(error).t;
-  //     // }
-  //     expect(async () => await groupService.checkGroupIsCreated(groupForTest.name)).rejects.toThrow(
-  //       DuplicationError
-  //     );
-  //   });
+  test("checkGroupIsCreated (before deleteByName)", async () => {
+    const check: Function = async () => {
+      await groupService.checkIfGroupCreatedByName(groupForTest.name);
+    };
+    expect(check).rejects.toThrowError(DuplicationError);
+  });
+
+  test("getGroups (before deleteByName)", async () => {
+    const groups: Array<Group> = await groupService.getGroups();
+    expect(groups[0].name).toBe(savedGroup.name);
+  });
+
+  test("delete", async () => {
+    await groupService.deleteByName(groupForTest.name);
+  });
+
+  test("checkIfGroupNotExistedById", async () => {
+    const check: Function = async () => {
+      await groupService.checkIfGroupNotExistedById(savedGroup.id);
+    };
+    expect(check).rejects.toThrowError(NotFoundError);
+  });
+  afterAll(async () => {
+    await postgresDataSource.getInstance().getRepository(Group).delete({});
+  });
 });

@@ -1,0 +1,188 @@
+[33mcommit f40ad287d61be174492596dc545432c5efb9f417[m[33m ([m[1;36mHEAD -> [m[1;32mfeature/initial-test[m[33m)[m
+Author: Sittipol Manitkul <workpapio@gmail.com>
+Date:   Sun Apr 30 15:42:59 2023 +0700
+
+    Fix GroupRepository can get dynamic parameters
+
+[33mcommit 84fef336af14d542cf49e1f6d82f6e9a4da5ad84[m[33m ([m[1;31morigin/feature/initial-test[m[33m)[m
+Author: Sittipol Manitkul <workpapio@gmail.com>
+Date:   Sun Apr 30 14:47:47 2023 +0700
+
+    Add deleteByName for GroupRepository
+
+[33mcommit d21d0c88d45eabcd3b9a83f6c98010886fb87ffe[m
+Author: Sittipol Manitkul <workpapio@gmail.com>
+Date:   Sun Apr 30 14:46:56 2023 +0700
+
+    Complete tests GroupRepository
+
+[33mcommit 2e28ce7b135a013ba02e2dafcdb19459142df62f[m
+Author: Sittipol Manitkul <workpapio@gmail.com>
+Date:   Sun Apr 30 14:02:16 2023 +0700
+
+    Add deleteGroup to groupRepository
+
+[33mcommit e3230a2e38c039b460a125f01448763f045ab7a8[m
+Author: Sittipol Manitkul <workpapio@gmail.com>
+Date:   Tue Apr 25 22:42:41 2023 +0700
+
+    Add type of .env
+
+[33mcommit 17d9404e1c175e19b7db797e75d0119e3cd958ea[m
+Author: Sittipol Manitkul <workpapio@gmail.com>
+Date:   Tue Apr 25 16:30:51 2023 +0700
+
+    Complete get debt members
+
+[33mcommit 95340e5cd51e87104b57bdfa33739f5927c2fb2b[m
+Author: Sittipol Manitkul <workpapio@gmail.com>
+Date:   Tue Apr 25 16:09:29 2023 +0700
+
+    Add dependenct injection to all router
+
+[33mcommit 6195dd134297f229ef9cf3e47152d2f7f13ee067[m
+Author: Sittipol Manitkul <workpapio@gmail.com>
+Date:   Tue Apr 25 15:08:07 2023 +0700
+
+    Add new dependencies for test
+
+[33mcommit 8a310dad796b4618305e26bde1fb09d5e9698932[m[33m ([m[1;31morigin/feature/dependency-injection-project[m[33m, [m[1;31morigin/dev[m[33m, [m[1;32mfeature/dependency-injection-project[m[33m, [m[1;32mdev[m[33m)[m
+Author: Sittipol Manitkul <workpapio@gmail.com>
+Date:   Tue Apr 25 14:37:34 2023 +0700
+
+    Delete unused import
+
+[33mcommit 47f065878c2171b9eab3b48eb6f1f911768423a6[m
+Author: Sittipol Manitkul <workpapio@gmail.com>
+Date:   Tue Apr 25 14:35:10 2023 +0700
+
+    Add dependency injection to router
+
+[33mcommit fa1cc085de52c381a6095232a16c87b3fe52f5ff[m
+Merge: fa6519c 788fba4
+Author: Sittipol Manitkul <workpapio@gmail.com>
+Date:   Tue Apr 25 11:36:22 2023 +0700
+
+    Merge branch 'feature/dependency-injection-project' of https://github.com/Sittipol-M/debt-menagement-typescript- into feature/dependency-injection-project
+
+[33mcommit fa6519c30acfedbc191537bfdf695d5a34264341[m
+Author: Sittipol Manitkul <workpapio@gmail.com>
+Date:   Tue Apr 25 11:36:14 2023 +0700
+
+    Revert "Add dependency injection group member service"
+    
+    This reverts commit 41fa65504e47131d0a3447da81cf9cc3ff0490ac.
+
+[33mcommit 41fa65504e47131d0a3447da81cf9cc3ff0490ac[m
+Author: Sittipol Manitkul <workpapio@gmail.com>
+Date:   Tue Apr 25 11:34:31 2023 +0700
+
+    Add dependency injection group member service
+
+[33mcommit a75db2e9f26fca9abc6f714cd9882218553a8788[m
+Author: Sittipol Manitkul <workpapio@gmail.com>
+Date:   Tue Apr 25 11:32:33 2023 +0700
+
+    Add dependency injection group member controller
+
+[33mcommit 4e4e974b47e4e1f15601a9de031f6f547fff9c02[m
+Author: Sittipol Manitkul <workpapio@gmail.com>
+Date:   Tue Apr 25 11:29:45 2023 +0700
+
+    Add dependency injection group service
+
+[33mcommit e81562439cd8b97ca9319c9acc02904496e8349f[m
+Author: Sittipol Manitkul <workpapio@gmail.com>
+Date:   Tue Apr 25 11:28:03 2023 +0700
+
+    Add dependency injection group controller
+
+[33mcommit 986f267c150959455e856af2d326aa99ac71accb[m
+Author: Sittipol Manitkul <workpapio@gmail.com>
+Date:   Tue Apr 25 11:24:54 2023 +0700
+
+    Add dependency injection debt member service
+
+[33mcommit a994c65296b770149db5d218e1e7365bca0a5107[m
+Author: Sittipol Manitkul <workpapio@gmail.com>
+Date:   Tue Apr 25 11:21:59 2023 +0700
+
+    Add dependency injection debt member controller
+
+[33mcommit 9df095bf9b8c30d7dc99136493dc50d511661d46[m
+Author: Sittipol Manitkul <workpapio@gmail.com>
+Date:   Tue Apr 25 11:16:50 2023 +0700
+
+    Add dependency injection debt controller
+
+[33mcommit b8eebe680a330c90081fe86faf0faaf414f6e2fe[m
+Author: Sittipol Manitkul <workpapio@gmail.com>
+Date:   Tue Apr 25 11:13:27 2023 +0700
+
+    Add dependency injection debt service
+
+[33mcommit d6b88be5a7b18273f48107bd0be8580d268498fa[m
+Author: Sittipol Manitkul <workpapio@gmail.com>
+Date:   Tue Apr 25 09:33:47 2023 +0700
+
+    Delete duplicate gitignore
+
+[33mcommit 788fba406077cf6e636c464e159d37b5f1d39fb2[m
+Author: Sittipol Manitkul <workpapio@gmail.com>
+Date:   Tue Apr 25 11:34:31 2023 +0700
+
+    Add dependency injection group member service
+
+[33mcommit c595f42f6ac9ee892ea3c249cc978d277a5d5062[m
+Author: Sittipol Manitkul <workpapio@gmail.com>
+Date:   Tue Apr 25 11:32:33 2023 +0700
+
+    Add dependency injection group member controller
+
+[33mcommit f86ea08857eb7d308e2985bfcf3b2e49e88de2ad[m
+Author: Sittipol Manitkul <workpapio@gmail.com>
+Date:   Tue Apr 25 11:29:45 2023 +0700
+
+    Add dependency injection group service
+
+[33mcommit 5442c708f2a280fb203985e12edb72e0e695b889[m
+Author: Sittipol Manitkul <workpapio@gmail.com>
+Date:   Tue Apr 25 11:28:03 2023 +0700
+
+    Add dependency injection group controller
+
+[33mcommit 0f6318456b58bd76d6c4736cc0bb241fca20f44c[m
+Author: Sittipol Manitkul <workpapio@gmail.com>
+Date:   Tue Apr 25 11:24:54 2023 +0700
+
+    Add dependency injection debt member service
+
+[33mcommit 2fdbc52388090311adddb72db43866623a1191d4[m
+Author: Sittipol Manitkul <workpapio@gmail.com>
+Date:   Tue Apr 25 11:21:59 2023 +0700
+
+    Add dependency injection debt member controller
+
+[33mcommit 06838ec3d5c6af48fc2e0c968805a28db762913b[m
+Author: Sittipol Manitkul <workpapio@gmail.com>
+Date:   Tue Apr 25 11:16:50 2023 +0700
+
+    Add dependency injection debt controller
+
+[33mcommit 68d45a4e84f75a5c916fd6de8272a0bf108efa3b[m
+Author: Sittipol Manitkul <workpapio@gmail.com>
+Date:   Tue Apr 25 11:13:27 2023 +0700
+
+    Add dependency injection debt service
+
+[33mcommit 174a924d17789436b375d675acaebb5a3a27fb0e[m[33m ([m[1;31morigin/main[m[33m, [m[1;32mmain[m[33m)[m
+Author: Sittipol Manitkul <workpapio@gmail.com>
+Date:   Tue Apr 25 09:33:47 2023 +0700
+
+    Delete duplecate gitignore
+
+[33mcommit d5012227da446034c57c94ee2712937319dd9de7[m
+Author: Sittipol Manitkul <workpapio@gmail.com>
+Date:   Mon Apr 24 21:19:27 2023 +0700
+
+    Complete routes, controllers, structure
