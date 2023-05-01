@@ -31,13 +31,11 @@ describe("GroupRepository", () => {
 
   test("findAll (before deleteGroup)", async () => {
     const groups: Array<Group> = await groupRepository.findAll();
-    console.log({ groups });
     expect(groups[0].name).toBe(createdGroup.name);
   });
 
   test("findOne (before deleteGroup)", async () => {
     const group: Group = await groupRepository.findOne(groupForTest);
-    console.log({ group });
     expect(group.name).toBe(createdGroup.name);
   });
 
